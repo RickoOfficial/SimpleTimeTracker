@@ -184,7 +184,8 @@ let taskInterface = {
             {
               dynamic_tasks: false,
               sort_by: "id",
-              sort_direction: "asc"
+              sort_direction: "asc",
+              time_format: "{H}:{M}:{S}"
             },
             (items) => {
               self.options = items;
@@ -469,9 +470,9 @@ let taskInterface = {
         if (task.running === 1) {
           let start = new Date(task.start);
           let dif = Number(task.time) + Math.floor((new Date().getTime() - start.getTime()) / 1000)
-          out += '<span class="timer">' + taskInterface.hms(dif) + '</span>';
+          out += '<span class="timer">' + taskInterface.displayTime(dif) + '</span>';
         } else {
-          out += '<span class="timer">' + taskInterface.hms(task.time) + '</span>';
+          out += '<span class="timer">' + taskInterface.displayTime(task.time) + '</span>';
         }
 
         out += '<a href="#" class="power play ' + (task.running === 1 ? 'running' : '') + '" title="Timer on/off" rel="' + task.id + '"></a>';
@@ -502,7 +503,7 @@ let taskInterface = {
       })
     }
 
-    $("#total-time-counter").html(taskInterface.hms(totalTime));
+    $("#total-time-counter").html(taskInterface.displayTime(totalTime));
   },
 
   init: async function () {
@@ -565,7 +566,7 @@ let taskInterface = {
     // setup interval for counter
     taskInterface.intervals[task.id] = window.setInterval(function () {
       let dif = Number(task.time) + Math.floor((new Date().getTime() - start.getTime()) / 1000)
-      $('#item' + task.id + ' .timer').text(taskInterface.hms(dif));
+      $('#item' + task.id + ' .timer').text(taskInterface.displayTime(dif));
     }, 500);
   },
 
@@ -578,7 +579,7 @@ let taskInterface = {
     start = new Date(task.start); // read from DB
     stop = new Date(); // now
     dif = Number(task.time) + Math.floor((stop.getTime() - start.getTime()) / 1000); // time diff in seconds
-    $('#item' + task.id + ' .timer').text(taskInterface.hms(dif));
+    $('#item' + task.id + ' .timer').text(taskInterface.displayTime(dif));
 
     // update record
     await tasks.update(
@@ -612,17 +613,29 @@ let taskInterface = {
     }
   },
 
-  hms: function (secs) {
-    //secs = secs % 86400; // fix 24:00:00 overlay
-    let time = [0, 0, secs], i;
+  formatTime: function (secs, template) {
+    let time = [0, 0, Math.max(0, Math.floor(secs))], i;
     for (i = 2; i > 0; i--) {
       time[i - 1] = Math.floor(time[i] / 60);
       time[i] = time[i] % 60;
-      if (time[i] < 10) {
-        time[i] = '0' + time[i];
-      }
     }
-    return time.join(':');
+    const pad = (n) => (n < 10 ? '0' + n : String(n));
+    return String(template)
+      .replace(/\{H\}/g, time[0])
+      .replace(/\{M\}/g, pad(time[1]))
+      .replace(/\{S\}/g, pad(time[2]))
+      .replace(/\{h\}/g, time[0])
+      .replace(/\{m\}/g, time[1])
+      .replace(/\{s\}/g, time[2]);
+  },
+
+  displayTime: function (secs) {
+    const template = this.options?.time_format ?? '{H}:{M}:{S}';
+    return this.formatTime(secs, template);
+  },
+
+  hms: function (secs) {
+    return this.formatTime(secs, '{H}:{M}:{S}');
   },
 
   sec: function (hms) {

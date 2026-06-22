@@ -3,12 +3,14 @@ const saveOptions = () => {
   const dynamic_tasks = document.getElementById('dynamic_tasks').checked;
   const sort_by = document.getElementById('sort_by').value ?? 'id';
   const sort_direction = document.getElementById('sort_direction').value ?? 'asc';
+  const time_format = document.getElementById('time_format').value.trim() || '{H}:{M}:{S}';
 
   chrome.storage.local.set(
     {
       dynamic_tasks: dynamic_tasks,
       sort_by: sort_by,
-      sort_direction: sort_direction
+      sort_direction: sort_direction,
+      time_format: time_format
     },
     () => {
       // Update status to let user know options were saved.
@@ -28,12 +30,14 @@ const restoreOptions = () => {
     {
       dynamic_tasks: false,
       sort_by: 'id',
-      sort_direction: 'asc'
+      sort_direction: 'asc',
+      time_format: '{H}:{M}:{S}'
     },
     (items) => {
       document.getElementById('dynamic_tasks').checked = items.dynamic_tasks;
       document.getElementById('sort_by').value = items.sort_by;
       document.getElementById('sort_direction').value = items.sort_direction;
+      document.getElementById('time_format').value = items.time_format;
     }
   );
 };

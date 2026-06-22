@@ -195,7 +195,7 @@ textarea:focus {
 
 #form-list label.title,
 .form label.title {
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 #form-list label small,
@@ -208,6 +208,16 @@ textarea:focus {
 
 #options {
   min-height: 20rem;
+}
+
+#options .item small {
+  display: block;
+  font-size: 10px;
+  color: #888;
+  text-align: left;
+  margin-top: 0.25rem;
+  line-height: 1.3;
+  font-weight: normal;
 }
 
 .copyright {
@@ -258,7 +268,7 @@ textarea:focus {
   position: absolute;
   right: .25rem;
   margin: 0 auto;
-  top: 50%;
+  top: 65%;
   transform: translateY(-50%);
   border: 0;
   background: transparent;
@@ -282,8 +292,8 @@ textarea:focus {
 
 #form-list .item span.timer {
   position: absolute;
-  right: 2rem;
-  top: 50%;
+  right: 2.25rem;
+  top: 65%;
   transform: translateY(-50%);
   font-size: 16px;
 }

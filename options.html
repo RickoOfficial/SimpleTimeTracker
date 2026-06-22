@@ -40,6 +40,17 @@
                 </select>
             </div>
 
+            <div class="item">
+                <label for="time_format">Timer display format</label>
+                <input type="text" id="time_format" class="text">
+                <small>
+                    Use placeholders: {H} hours, {M} minutes (padded), {S} seconds (padded).
+                    Without padding: {h}, {m}, {s}. <br>
+                    Default: {H}:{M}:{S} → 1:23:45. <br>
+                    Example: {H} hours {M} minutes {S} seconds → 1 hours 23 minutes 45 seconds.
+                </small>
+            </div>
+
             <p id="status"></p>
             <div class="buttons">
                 <input type="button" id="save" value="Save">
