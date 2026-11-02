@@ -1,8 +1,9 @@
 {
   "name": "simpletimetracker",
-  "description": "Simple time tracker extension for Google Chrome",
+  "description": "Simple time tracker extension for Opera and Yandex Browser",
   "keywords": [
-    "chrome",
+    "opera",
+    "yandex-browser",
     "extenstion",
     "simple time tracker",
     "time",

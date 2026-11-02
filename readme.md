@@ -2,11 +2,36 @@
 
 How much time spend on tasks? Start tracking it right now with Simple Time Tracker. Tired of complicated time tracking applications? No need any registration, permissions or unnecessary features. Add a task, start and stop the timer. And that's it 🎉
 
-## Install Chrome Extension
+## Supported browsers
 
-https://chrome.google.com/webstore/detail/simple-time-tracker/ifdmgpcchapjlldljfegfdnojaieacmn
+Simple Time Tracker supports Opera and Yandex Browser. It is distributed through Opera Add-ons; the public listing URL will be added after the first publication.
+
+## Install locally
+
+1. Open `opera://extensions` in Opera.
+2. Enable Developer mode.
+3. Select **Load unpacked** and choose this repository directory.
+
+Yandex Browser users can install the published extension from Opera Add-ons when it becomes available.
+
+## Publishing and updates
+
+`manifest.json` uses Opera's official update service, so Opera Add-ons delivers published updates automatically.
+
+For a release:
+
+1. Increase `version` in `manifest.json`.
+2. Run `npm ci` and `npx gulp zip`.
+3. In `opera://extensions`, use **Pack extension** for this repository directory; Opera creates a CRX package in its parent directory.
+4. Upload the CRX as a new package in Opera Add-ons.
+5. Keep the Opera signing key outside this repository; it is required for later releases under the same extension identity.
 
 # CHANGELOG
+
+## 2.3.1
+
+- Added Opera Add-ons distribution and update configuration.
+- Documented Opera and Yandex Browser installation.
 
 ## 2.3.0
 

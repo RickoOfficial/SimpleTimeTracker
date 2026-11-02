@@ -1,8 +1,8 @@
 {
   "name": "Simple Time Tracker",
-  "update_url": "https://clients2.google.com/service/update2/crx",
+  "update_url": "https://extension-updates.opera.com/api/omaha/update/",
   "description": "Start tracking it right now with Simple Time Tracker. No need any registration, permissions or unnecessary features.",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "manifest_version": 3,
   "options_ui": {
     "page": "options.html",
